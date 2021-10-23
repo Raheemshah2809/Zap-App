@@ -10,7 +10,7 @@ const geolocate = function () {
     const $result = $(".result");
     const $trigger = $("#trigger");
 
-    const success = position => {
+    const success = (position) => {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
         const speed = position.coords.speed ? position.coords.speed : "N/A";
@@ -19,9 +19,7 @@ const geolocate = function () {
             position.coords.altitude :
             "N/A";
         const accuracy = (position.coords.accuracy / 1609).toFixed(3);
-        const altitudeAccuracy = (position.coords.altitudeAccuracy / 1609).toFixed(
-            3);
-
+        const altitudeAccuracy = (position.coords.altitudeAccuracy / 1609).toFixed(3);
 
         $latitude.html(latitude + "&deg;");
         $longitude.html(longitude + "&deg;");
@@ -29,9 +27,7 @@ const geolocate = function () {
         $speed.html(speed);
         $altitude.html(altitude);
         $accuracy.html(accuracy + " mile" + (accuracy > 1 ? "s" : ""));
-        $altitudeAccuracy.html(
-            altitudeAccuracy + " mile" + (altitudeAccuracy > 1 ? "s" : ""));
-
+        $altitudeAccuracy.html(altitudeAccuracy + " mile" + (altitudeAccuracy > 1 ? "s" : ""));
 
         $status.html("");
 
@@ -44,11 +40,11 @@ const geolocate = function () {
     };
 
     const error = () => {
-        $status.
-        html(
-            'Unable to retrieve your location. This may be due to your browser security settings or a known Chrome issue with embedded iframes,').
-
-        show();
+        $status.html('Unable to retrieve your location. This may be due to your browser security settings or a known Chrome issue with embedded iframes, <a href="https://codepen.io/bmarshall511/full/rZMbey" target="_blank"><strong>try it directly on CodePen</strong></a>.').show();
+        $trigger.html("Try directly on CodePen").click(function (e) {
+            e.preventDefault();
+            window.open('https://codepen.io/bmarshall511/full/rZMbey', '_blank');
+        });
     };
 
     if (navigator.geolocation) {
@@ -57,7 +53,7 @@ const geolocate = function () {
         navigator.geolocation.getCurrentPosition(success, error);
     } else {
         $trigger.html("Not supported.");
-        $status.html("Geolocation is not supported by your browser.").show();
+        $status.html("Geolocation is not supported by your browser.").show();;
     }
 };
 
