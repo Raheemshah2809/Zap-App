@@ -51,6 +51,12 @@
             </div>
         </div>
     </div>
+    <input type="file" accept="image/*" id="file-input">
+<script>
+  const fileInput = document.getElementById('file-input');
+
+  fileInput.addEventListener('change', (e) => doSomethingWithFiles(e.target.files));
+</script>
     <script src="main.js"></script>
 </body>
 
