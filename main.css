@@ -1,45 +1,100 @@
-.container {
-    margin: 2rem auto;
-    max-width: 50rem;
-    text-align: center;
+* {
+    box-sizing: border-box;
 }
 
-form {
-    margin: 2.5rem auto;
+body {
+    color: #03121b;
+    font-family: "Literata", serif;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.5;
+    padding: 1rem;
 }
 
-.find-me.btn {
-    font-family: inherit;
+h1 {
+    margin-bottom: 2rem;
 }
 
-.find-me.btn,
-.not-on-https,
-.no-geolocation-support,
-.coordinates {
-    font-size: 1.5em;
+label,
+.result,
+#status {
+    font-family: "Rubik", sans-serif;
 }
 
-.not-on-https,
-.no-geolocation-support {
-    display: none;
-}
-
-.coordinates {
-    display: none;
-    margin-bottom: 2.5rem;
-}
-
-.visible {
+label {
+    color: #254959;
     display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
 }
 
-#map {
-    margin: 0 auto;
-    position: relative;
+a {
+    color: #20baff;
+    text-decoration: none;
 }
 
-#map-canvas {
-    height: 25rem;
-    min-height: 25rem;
+a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background: #20baff;
+    border: 0;
+    border-radius: 0.3em;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Literata", serif;
+    font-weight: 500;
+    outline: none;
+    padding: 1.5rem;
+    transition: all 0.5s;
     width: 100%;
+}
+
+button:hover {
+    background: #03121b;
+}
+
+small {
+    display: block;
+    margin-top: 1.5rem;
+}
+
+.wrapper {
+    margin: auto;
+    max-width: 860px;
+    width: 100%;
+}
+
+.results {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+    margin-top: 0.5rem;
+}
+
+.result {
+    background: rgba(228, 228, 228, 0.5);
+    display: none;
+    margin-bottom: 0.5rem;
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    padding: 1rem;
+    width: calc(100% / 3 - 0.5rem);
+}
+
+.result div {
+    font-size: 1.4rem;
+}
+
+#status {
+    background: #f5d67b;
+    bottom: 0;
+    display: none;
+    font-size: 0.9rem;
+    max-width: 450px;
+    padding: 1.5rem;
+    position: absolute;
+    right: 0;
 }

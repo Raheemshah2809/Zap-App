@@ -1,77 +1,66 @@
-$(document).ready(function ($) {
+const geolocate = function () {
+    const $status = $("#status");
+    const $latitude = $("#latitude");
+    const $longitude = $("#longitude");
+    const $heading = $("#heading");
+    const $speed = $("#speed");
+    const $altitude = $("#altitude");
+    const $accuracy = $("#accuracy");
+    const $altitudeAccuracy = $("#altitudeAccuracy");
+    const $result = $(".result");
+    const $trigger = $("#trigger");
 
-    var $findMeBtn = $('.find-me');
+    const success = position => {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const speed = position.coords.speed ? position.coords.speed : "N/A";
+        const heading = position.coords.heading ? position.coords.heading : "N/A";
+        const altitude = position.coords.altitude ?
+            position.coords.altitude :
+            "N/A";
+        const accuracy = (position.coords.accuracy / 1609).toFixed(3);
+        const altitudeAccuracy = (position.coords.altitudeAccuracy / 1609).toFixed(
+            3);
 
-    // Check if browser supports the Geolocation API
-    if (!navigator.geolocation) {
 
-        $findMeBtn.addClass('disabled');
-        $('.no-geolocation-support').addClass('visible');
+        $latitude.html(latitude + "&deg;");
+        $longitude.html(longitude + "&deg;");
+        $heading.html(heading);
+        $speed.html(speed);
+        $altitude.html(altitude);
+        $accuracy.html(accuracy + " mile" + (accuracy > 1 ? "s" : ""));
+        $altitudeAccuracy.html(
+            altitudeAccuracy + " mile" + (altitudeAccuracy > 1 ? "s" : ""));
 
-        // Check if the page is accessed over HTTPS
-    } else if (location.protocol !== 'https:') {
 
-        // Check if top-level frame
-        if (window.top === window.self) {
+        $status.html("");
 
-            // Reload the page over HTTPS
-            location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        $result.show();
+        $status.hide();
 
-            // If not top-level, display a message
-            // Note: CodePen does not allow an `<iframe>` to reload the top-level frame (browser window). See about the `sandbox` attribute at https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe#Attributes.
-        } else {
+        $trigger.html("Refresh location");
 
-            $findMeBtn.addClass('disabled');
-            $('.not-on-https').addClass('visible');
-
-        };
-
-        // Let's use the Geolocation API
-    } else {
-
-        $findMeBtn.on('click', function (e) {
-
-            e.preventDefault();
-
-            navigator.geolocation.getCurrentPosition(function (position) {
-
-                // Get the location coordinates
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-
-                $('.latitude').text(lat.toFixed(6) + '°');
-                $('.longitude').text(lng.toFixed(6) + '°');
-                $('.coordinates').addClass('visible');
-
-                // Create a map and place a marker at the current location
-                // https://developers.google.com/maps/documentation/javascript/reference
-
-                var mapLatLng = new google.maps.LatLng(lat, lng);
-
-                var mapOptions = {
-                    zoom: 15,
-                    mapTypeControl: false,
-                    center: mapLatLng,
-                };
-
-                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-                var mapMarker = new google.maps.Marker({
-                    position: mapLatLng,
-                    map: map,
-                    title: 'Your browser/device places you here',
-                });
-
-                // Re-center the map on user location when window/viewport resizes
-                $(window).resize(function () {
-                    google.maps.event.trigger(map, 'resize');
-                    map.panTo(mapLatLng);
-                });
-
-            });
-
-        });
-
+        console.log(position);
     };
 
+    const error = () => {
+        $status.
+        html(
+            'Unable to retrieve your location. This may be due to your browser security settings or a known Chrome issue with embedded iframes,').
+
+        show();
+    };
+
+    if (navigator.geolocation) {
+        $status.html("Locating...").show();
+        $trigger.html("Locating...");
+        navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+        $trigger.html("Not supported.");
+        $status.html("Geolocation is not supported by your browser.").show();
+    }
+};
+
+$("#trigger").click(() => {
+    geolocate();
 });

@@ -6,32 +6,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    <link rel="stylesheet" href="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3HyALFmKHU1WJAEtoVk7tQcgxmRR-ouA">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
     <title>Document</title>
 </head>
 
 <body>
-    <div class="container">
+    <div class="wrapper">
+        <h1>HTML5 Geolocation Demo</h1>
+        <div id="status"></div>
+        <button id="trigger">Show my location</button>
 
-        <h1>Geolocation API demo</h1>
-
-        <form class="form-horizontal">
-            <div class="form-group">
-                <button type="button" class="find-me btn btn-info btn-block">Find your location</button>
+        <div class="results">
+            <div class="result">
+                <label>Accuracy</label>
+                <div id="accuracy"></div>
             </div>
-        </form>
-
-        <p class="not-on-https">Not on HTTPS :( Most browsers require HTTPS to run the Geolocation API.</p>
-        <p class="no-geolocation-support">The Geolocation API isn't supported in this browser :(</p>
-
-        <p class="coordinates">Latitude is <b class="latitude">00.000000°</b>, longitude is <b
-                class="longitude">00.000000°</b>.</p>
-
-        <div id="map">
-            <div id="map-canvas"></div>
+            <div class="result">
+                <label>Altitude Accuracy</label>
+                <div id="altitudeAccuracy"></div>
+            </div>
+            <div class="result">
+                <label>Latitude</label>
+                <div id="latitude"></div>
+            </div>
+            <div class="result">
+                <label>Longitude</label>
+                <div id="longitude"></div>
+            </div>
+            <div class="result">
+                <label>Heading</label>
+                <div id="heading"></div>
+            </div>
+            <div class="result">
+                <label>Speed</label>
+                <div id="speed"></div>
+            </div>
+            <div class="result">
+                <label>Altitude</label>
+                <div id="altitude"></div>
+            </div>
         </div>
-
     </div>
-
+    <script src="main.js"></script>
 </body>
 
 </html>
