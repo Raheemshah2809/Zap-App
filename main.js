@@ -70,15 +70,3 @@ var handleSuccess = function (stream) {
     player.srcObject = stream;
 };
 
-captureButton.addEventListener('click', function () {
-    var context = snapshot.getContext('2d');
-    // Draw the video frame to the canvas.
-    context.drawImage(player, 0, 0, snapshotCanvas.width,
-        snapshotCanvas.height);
-    console.log(context.canvas.toDataURL());
-});
-
-navigator.mediaDevices.getUserMedia({
-        video: true
-    })
-    .then(handleSuccess);
