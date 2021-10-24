@@ -85,11 +85,11 @@ small {
 }
 
 .result div {
-    font-size: 1.0rem;
+    font-size: 1.4rem;
 }
 
 #status {
-    background: #f5d67b;
+    background: teal;
     bottom: 0;
     display: none;
     font-size: 0.9rem;
